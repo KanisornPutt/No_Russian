@@ -1,0 +1,159 @@
+@startuml
+class entity.skills.Molly {
++ <<Create>> Molly(String,int)
++ void perform(AgentInGame)
++ String toString()
+}
+abstract class entity.base.Weapon {
+# String name
+# String upgradeName
+# int damage
+# int criticalRate
+# int criticalDamage
+# int upgradePrice
+# ImageView post1Image
+# String post1ImageName
+# ImageView post1FlipImage
+# String post1FlipImageName
+# ImageView post2Image
+# String post2ImageName
+# ImageView post2FlipImage
+# String post2FlipImageName
+# <<Create>> Weapon(String,int,int,int,int)
++ String toString()
++ int getDamage()
++ int getUpgradePrice()
++ String getUpgradeName()
++ int getCriticalDamage()
++ ImageView getPost1Image()
++ String getPost1ImageName()
++ ImageView getPost1FlipImage()
++ String getPost1FlipImageName()
++ ImageView getPost2Image()
++ ImageView getPost2FlipImage()
+}
+class entity.agent.Brimstone {
++ <<Create>> Brimstone()
+}
+class entity.agent.Phoenix {
++ <<Create>> Phoenix()
+}
+class entity.skills.Smoke {
++ <<Create>> Smoke(String,int)
++ void perform(AgentInGame)
++ String toString()
+}
+class entity.weapon.Classic {
++ <<Create>> Classic()
+}
+abstract class entity.base.Agent {
+# Weapon weapon
+# int flashed
+# int smoked
+# int mollied
+# int accuracy
+# Skill skill1
+# Skill skill2
+# ImageView iconImage
+# String iconImageName
+# ImageView post1Image
+# String post1ImageName
+# ImageView post1FlipImage
+# String post1FlipImageName
+# ImageView post2Image
+# String post2ImageName
+# ImageView post2FlipImage
+# String post2FlipImageName
+# <<Create>> Agent(String)
++ void setFlashed(int)
++ void setSmoked(int)
++ void setMollied(int)
++ boolean isFlashed()
++ boolean isSmoked()
++ boolean isMollied()
++ int attack(Agent)
++ void setHp(int)
++ Weapon getWeapon()
++ int getAccuracy()
++ String toString()
++ int getVisibility()
++ Skill getSkill1()
++ Skill getSkill2()
++ ImageView getIconImage()
++ String getIconImageName()
++ ImageView getPost1Image()
++ String getPost1ImageName()
++ int getFlashed()
++ int getSmoked()
++ int getMollied()
++ ImageView getPost1FlipImage()
++ String getPost1FlipImageName()
++ ImageView getPost2Image()
++ ImageView getPost2FlipImage()
++ int getUpgradePrice()
++ void upgrade()
+}
+class entity.agent.Omen {
++ <<Create>> Omen()
+}
+abstract class entity.base.Skill {
+# String name
+# int price
+# int effect
++ <<Create>> Skill(String,int,int)
++ String getName()
++ {abstract}void perform(AgentInGame)
++ int getPrice()
++ String toString()
++ int getEffect()
+}
+class entity.agent.Skye {
++ <<Create>> Skye()
+}
+class entity.skills.Flash {
++ <<Create>> Flash(String,int)
++ void perform(AgentInGame)
++ String toString()
+}
+class entity.weapon.Vandal {
++ <<Create>> Vandal()
+}
+abstract class entity.base.BaseEntity {
+# Random random
+# String name
+# int hp
+# int visibility
+# boolean isAlive
++ <<Create>> BaseEntity(String,int)
++ void setHp(int)
++ int getHp()
++ boolean isAlive()
++ String getName()
++ {abstract}String toString()
++ int getVisibility()
+}
+class entity.skills.Heal {
+~ int healed
++ <<Create>> Heal(String,int)
++ void perform(AgentInGame)
++ String toString()
++ int getEffect()
+}
+class entity.weapon.Operator {
++ <<Create>> Operator()
+}
+
+
+entity.base.Skill <|-- entity.skills.Molly
+entity.base.Agent <|-- entity.agent.Brimstone
+entity.base.Agent <|-- entity.agent.Phoenix
+entity.base.Skill <|-- entity.skills.Smoke
+entity.base.Weapon <|-- entity.weapon.Classic
+entity.base.BaseEntity <|-- entity.base.Agent
+entity.base.Agent <|-- entity.agent.Omen
+entity.base.Agent <|-- entity.agent.Skye
+entity.base.Skill <|-- entity.skills.Flash
+entity.base.Weapon <|-- entity.weapon.Vandal
+entity.base.Skill <|-- entity.skills.Heal
+entity.base.Weapon <|-- entity.weapon.Operator
+@enduml

@@ -1,0 +1,279 @@
+@startuml
+interface component.Hoverable {
+~ void setHovering(boolean)
+}
+class component.InGameButton {
+- boolean active
+- boolean hovering
+- Rectangle rectangle
+- Rectangle rectangle2
+- Text text
+- int price
++ <<Create>> InGameButton(String,int)
++ void setHovering(boolean)
++ boolean isActive()
++ void setActive(boolean)
++ void setText(String)
++ int getPrice()
++ void setPrice(int)
++ boolean canBuy()
+}
+class pane.SixArrayPane {
++ <<Create>> SixArrayPane()
++ void addToIcons(CharacterImageBox)
++ void deleteIcons()
+}
+class component.CharacterImageBox {
+- ImageView imageView
+- int size
+- Rectangle rectangle
++ <<Create>> CharacterImageBox(int,Agent,Color)
++ void setImageView(ImageView)
++ void setRectangle(Color)
++ ImageView getImageView()
+}
+class pane.AgentInGame {
+# StackPane stackPane
+# Agent agent
+# ImageView defaultView
+# ImageView weaponView
+# ImageView smokedView
+# ImageView flashView
+# ImageView molliedView
+# Rectangle rectangle
+# Rectangle currentRectangle
+# StatusPane status
+# Boolean isCurrent
+# ImageView skySmokeImage
+# String skySmokeImageName
+# ImageView darkCoverImage
+# String darkCoverImageName
+# ImageView deadImage
+# String deadImageName
+# ImageView omenFlashImage
+# String omenFlashImageName
+# ImageView phoenixFlashImage
+# String phoenixFlashImageName
+# ImageView skyeFlashImage
+# String skyeFlashImageName
+# ImageView molliedImage
+# String molliedImageName
++ <<Create>> AgentInGame(Agent)
++ void setHovering(boolean)
++ Agent getAgent()
++ void update()
++ void setCurrent(boolean)
++ void setSmoked(boolean)
++ void setFlash(boolean)
++ void setMollied(boolean)
++ void setWeapon(boolean)
++ AgentInGame getSelf()
++ void setSmokedView(ImageView)
++ void setFlashView(ImageView)
++ void changeDefaultView(ImageView)
++ void setDefaultView(ImageView)
++ void changeWeaponView(ImageView)
++ void setWeaponView(ImageView)
++ ImageView getSkySmokeImage()
++ ImageView getDarkCoverImage()
++ ImageView getOmenFlashImage()
++ ImageView getPhoenixFlashImage()
++ ImageView getSkyeFlashImage()
+}
+class pane.StatusActionPane {
+- CharacterImageBox image
+- StatusPane status
+- GridPane controlPanel
+- InGameButton shoot
+- InGameButton upgrade
+- InGameButton skill1
+- InGameButton skill2
+- Text output
+- Text playerTurn
+- List<InGameButton> buttons
++ <<Create>> StatusActionPane(Agent)
++ void createControllPanel()
++ CharacterImageBox getImage()
++ void setImage(Agent)
++ StatusPane getStatus()
++ void resetButtonsExcept(InGameButton)
++ List<InGameButton> getButtons()
++ InGameButton getShoot()
++ InGameButton getSkill1()
++ InGameButton getSkill2()
++ void press(InGameButton)
++ void setButton(Agent)
++ void setOutput(String)
++ void addOutput(String)
++ void setPlayerTurn()
+}
+class application.Main {
+- Scene startGame
+- VBox startGameComponent
+- Scene endGame
+- VBox endGameComponent
+- {static} Text endGameText
+- Scene agentSelect
+- {static} BorderPane agentselectcomponent
+- Scene inGame
+- {static} BorderPane inGameComponent
+- {static} Stage stage
+- ImageView myImageView
+- Media media
+- MediaPlayer mediaPlayer
+- ImageView map
+- ImageView agentSelectImage
+- boolean isMute
+- {static} Thread thread
+- {static} SquareButton endGameButton
+- {static} Text playerWin
++ {static} Font myfont
++ void start(Stage)
+- Scene createStartGame()
+- Scene createAgentSelect()
+- Scene createInGame()
+- Scene createEndGame()
++ {static} void switchScene(Scene)
++ {static} void main(String[])
++ {static} void clear()
++ {static} void setGameOver(int)
+}
+class pane.StatusPane {
+- Text nameStatus
+- Text hpStatus
+- Text flashedStatus
+- Text smokedStatus
+- Text molliedStatus
+- Text weaponStatus
++ <<Create>> StatusPane()
++ void setStatus(Agent)
++ void setNameStatus(String)
++ void setHpStatus(int)
++ void setFlashedStatus(int)
++ void setSmokedStatus(int)
++ void setMolliedStatus(int)
++ void setWeaponStatus(Weapon)
+}
+class logic.GameLogic {
+- List<Agent> allAgents
+- List<AgentInGame> allAgentsInGame
+- int player1Credits
+- int player2Credits
+- List<Integer> turns
+- SixArrayPane versusPane
+- StatusActionPane statusActionPane
+- {static} GameLogic instance
+- AgentInGameP1Pane p1
+- AgentInGameP2Pane p4
+- Agent currentAgent
+- int currentTurn
+- int currentAgentTurn
+- boolean gameOver
+- MoneyTurnPane moneyTurnPane
+- int turnCount
+- int playerWin
++ <<Create>> GameLogic()
++ void createMoneyTurnPane()
++ {static} GameLogic getInstance()
++ void createStatusActionPane()
++ {static} void clearInstance()
++ void addAgent(Agent)
++ void removeLastAgent()
++ void createAllAgent()
++ List<Integer> shuffleTurns()
++ List<Integer> getTurns()
++ List<Agent> getAllAgents()
++ SixArrayPane getVersusPane()
++ StatusActionPane getStatusActionPane()
++ AgentInGameP1Pane getP1()
++ AgentInGameP1Pane getP2()
++ AgentInGameP1Pane getP3()
++ AgentInGameP2Pane getP4()
++ AgentInGameP2Pane getP5()
++ AgentInGameP2Pane getP6()
++ int getPlayer1Credits()
++ int getPlayer2Credits()
++ void setCurrentAgent(int)
++ Agent getCurrentAgent()
++ void nextTurn()
++ void action(AgentInGame)
++ MoneyTurnPane getMoneyTurnPane()
++ boolean canBuy(int)
++ boolean isGameOver()
++ AgentInGame getCurrentAgentsInGame()
++ void spendCredits(int)
++ void addCredit(int,int)
++ void update()
++ int getCurrentPlayer()
++ int getCurrentPlayerCredit()
++ String skillOutput(Skill,AgentInGame)
++ int getPlayerWin()
++ List<AgentInGame> getAllAgentsInGame()
+}
+class pane.AgentInGameP1Pane {
++ <<Create>> AgentInGameP1Pane(Agent)
+}
+class pane.AgentPane {
+- ArrayList<CharacterIcon> agentSelectPanel
+- int currentBox
++ <<Create>> AgentPane()
++ void setCurrentBox(int)
+}
+class component.CharacterIcon {
+- Rectangle rectangle
+- ImageView imageView
+- Agent agent
++ <<Create>> CharacterIcon(Agent)
++ void setActive(boolean)
+}
+class component.SquareButton {
+- Rectangle inside
+- Rectangle outside
++ <<Create>> SquareButton(String)
++ <<Create>> SquareButton(String,int,int)
++ void setHovering(boolean)
++ void setText(String)
++ void setText(String,int)
+}
+class pane.MoneyTurnPane {
+- Text money1
+- Text money2
+- Text player1
+- Text player2
+- HBox whoseTurn
+- NumberBox numberBox
++ <<Create>> MoneyTurnPane()
++ void setMoney1(int)
++ void setMoney2(int)
++ void setMoney(int,int)
++ void setWhoseTurn()
++ void setCurrentTurn(int)
+}
+class component.NumberBox {
+- Rectangle rectangle
+- Text text
++ <<Create>> NumberBox(int,int,int,Color)
+}
+class pane.AgentInGameP2Pane {
++ <<Create>> AgentInGameP2Pane(Agent)
+}
+
+
+component.Hoverable <|.. component.InGameButton
+javafx.scene.layout.StackPane <|-- component.InGameButton
+javafx.scene.layout.HBox <|-- pane.SixArrayPane
+javafx.scene.layout.StackPane <|-- component.CharacterImageBox
+component.Hoverable <|.. pane.AgentInGame
+javafx.scene.layout.HBox <|-- pane.AgentInGame
+javafx.scene.layout.HBox <|-- pane.StatusActionPane
+javafx.application.Application <|-- application.Main
+javafx.scene.layout.GridPane <|-- pane.StatusPane
+pane.AgentInGame <|-- pane.AgentInGameP1Pane
+javafx.scene.layout.TilePane <|-- pane.AgentPane
+javafx.scene.layout.StackPane <|-- component.CharacterIcon
+component.Hoverable <|.. component.SquareButton
+javafx.scene.layout.StackPane <|-- component.SquareButton
+javafx.scene.layout.HBox <|-- pane.MoneyTurnPane
+javafx.scene.layout.StackPane <|-- component.NumberBox
+pane.AgentInGame <|-- pane.AgentInGameP2Pane
+@enduml

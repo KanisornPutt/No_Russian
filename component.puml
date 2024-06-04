@@ -1,0 +1,55 @@
+@startuml
+interface component.Hoverable {
+~ void setHovering(boolean)
+}
+class component.SquareButton {
+- Rectangle inside
+- Rectangle outside
++ <<Create>> SquareButton(String)
++ void setHovering(boolean)
++ void setText(String)
+}
+class component.InGameButton {
+- boolean active
+- boolean hovering
+- Rectangle rectangle
+- Rectangle rectangle2
+- Text text
+- int price
++ <<Create>> InGameButton(String,int)
++ void setHovering(boolean)
++ boolean isActive()
++ void setActive(boolean)
++ void setText(String)
++ int getPrice()
++ void setPrice(int)
++ boolean canBuy()
+}
+class component.CharactorImageBox {
+- ImageView imageView
+- int size
++ <<Create>> CharactorImageBox(int,Agent,Color)
++ void setImageView(ImageView)
++ ImageView getImageView()
+}
+class component.CharactorIcon {
+- Rectangle rectangle
+- ImageView imageView
+- Agent agent
++ <<Create>> CharactorIcon(Agent)
++ void setActive(boolean)
+}
+class component.GameScreen {
++ <<Create>> GameScreen(double,double)
++ void paintComponent()
+}
+
+
+component.Hoverable <|.. component.SquareButton
+javafx.scene.layout.StackPane <|-- component.SquareButton
+component.Hoverable <|.. component.InGameButton
+javafx.scene.layout.StackPane <|-- component.InGameButton
+javafx.scene.layout.StackPane <|-- component.CharactorImageBox
+javafx.scene.layout.StackPane <|-- component.CharactorIcon
+javafx.scene.canvas.Canvas <|-- component.GameScreen
+@enduml
